@@ -1,7 +1,6 @@
-********************************************************************************
-/*!version 0.0  24jun2021  Joshua Bleiberg, joshua_bleiberg@brown.edu
-Note: Requires reghdfe
-*/
+
+*!version 0.0  24jun2021  Joshua Bleiberg, joshua_bleiberg@brown.edu
+
 capture program drop stackedev
 program define stackedev, eclass sortpreserve
 
@@ -17,16 +16,15 @@ syntax varlist(min=2 numeric) [if] [in] [pweight aweight fweight], ///
 	other_fe(varlist numeric ts fv) ///
 	interact_cov(string)]
 	
-********************************************************************************
-//Checking for never treated units
+*Checking for never treated units
 qui sum `never_treat'
 local max_var=r(max)
 if `max_var'!=1{
 di "Error: Stacked event study requires never treated comparison units. The never treated option (never_treat) should be a binary variable equal to 1 comparison units that do not receive treatment and 0 for units that do receive treatment."
 exit
 }
-********************************************************************************
-//Creating stacks for each treated cohort of units
+
+*Creating stacks for each treated cohort of units
 qui levelsof `cohort'
 	local t_val=r(levels)
 foreach i of local t_val{
@@ -43,8 +41,8 @@ qui tempfile stack`i'
 qui save "`stack`i''"
 restore
 }
-********************************************************************************
-//Appending together each stack
+
+*Appending together each stack
 qui sum `cohort'
 local stackmin=r(min)
 
@@ -61,19 +59,19 @@ foreach j of local t_val2{
     qui append using "`stack`j''"
     qui save `"`all_stacks'"', replace
 }
-********************************************************************************
-//Creating variable to estimate unit by stack variances
+
+*Creating variable to estimate unit by stack variances
 qui gen unit_stack=stack*`clust_unit'
 local clust_var unit_stack
-********************************************************************************
-//Allowing covariates to be interacted with stack
+
+*Allowing covariates to be interacted with stack
 if "`interact_cov'"=="Yes"{
 foreach i of local covariates{
 qui replace `i'=`i'*stack
 }
 }
-********************************************************************************
-//Estimating model with reghdfe
+
+*Estimating model with reghdfe
 di "**** Estimating Model with reghdfe ****"
 reghdfe `varlist' `covariates', absorb(i.`unit_fe'##i.stack i.`time'##i.stack `other_fe') cluster(`clust_var')
 
