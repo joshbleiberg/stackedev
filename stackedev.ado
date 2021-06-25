@@ -3,7 +3,7 @@
 Note: Requires reghdfe
 */
 capture program drop stackedev
-program define stackedev, eclass
+program define stackedev, eclass sortpreserve
 
 version 13
 
