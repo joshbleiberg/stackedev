@@ -54,7 +54,7 @@ Description
 Examples
 
     Read in simulated state policy dataset
-        . use https://github.com/joshbleiberg/stacked_event/raw/main/state_policy_effect.dta, clear
+        . use https://github.com/joshbleiberg/stackedev/raw/main/state_policy_effect.dta, clear
 
     Create a variable equal to the time that the unit first received treatment. It must be missing for never treated units.
         . gen treat_year=.
