@@ -1,0 +1,4 @@
+v 0.0
+d stackedev
+d https://github.com/joshbleiberg/stackedev
+d Joshua Bleiberg joshua_bleiberg@brown.edu
