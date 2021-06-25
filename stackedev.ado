@@ -1,4 +1,3 @@
-
 *!version 0.0  24jun2021  Joshua Bleiberg, joshua_bleiberg@brown.edu
 
 capture program drop stackedev
