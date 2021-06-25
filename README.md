@@ -9,7 +9,7 @@
 
 To install the **stackedev** package , execute the following in Stata:
 
-`github install joshbleiberg/stackedev'
+`github install joshbleiberg/stackedev`
 
 See the help_file.txt for support for how to implement the command and an illustrative example. A .sthlp is currently not available. 
 
