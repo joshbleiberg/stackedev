@@ -1,0 +1,7 @@
+v 0.0.1
+d Materials by Joshua Bleiberg
+d https://github.com/joshbleiberg/stackedev
+
+d 'stackedev': stacked event study
+
+p stackedev
