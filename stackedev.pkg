@@ -2,4 +2,5 @@ v 0.0.1
 d 'stackedev': stacked event study
 d Distribution-Date:   20210625
 d 
-F stackedev
+F eventstudyinteract.ado
+F eventstudyinteract.sthlp
