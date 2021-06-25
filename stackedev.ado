@@ -6,15 +6,7 @@ program define stackedev, eclass sortpreserve
 
 version 13
 
-syntax varlist(min=2 numeric) [if] [in] [pweight aweight fweight], ///
-	cohort(varname numeric) ///
-	time(varname numeric) ///
-	never_treat(varname numeric) ///
-	unit_fe(varname numeric) ///
-	clust_unit(varname numeric) ///
-	[COVARiates(varlist numeric ts fv) ///
-	other_fe(varlist numeric ts fv) ///
-	interact_cov(string)]
+syntax varlist(min=2 numeric) [if] [in] [pweight aweight fweight], cohort(varname numeric) time(varname numeric) never_treat(varname numeric) unit_fe(varname numeric) clust_unit(varname numeric) [COVARiates(varlist numeric ts fv) other_fe(varlist numeric ts fv) interact_cov(string)]
 	
 *Checking for never treated units
 qui sum `never_treat'
