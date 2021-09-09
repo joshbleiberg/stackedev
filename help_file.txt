@@ -68,20 +68,23 @@ Examples
         . recode no_treat (0=1) (1=0)
 
     Create leads and lags
-        . gen rel=year-treat_year
-        . replace rel=0 if ever==0
-        . recode rel (2001=-5) (2002=-4) (2003=-3) (2004=-2) (2005=-1) (2006=0) (2007=1) (2008=2) (2009=3) (2010=4)
-        . tab rel, gen(rel_)
-        . rename rel_1 pre5
-        . rename rel_2 pre4
-        . rename rel_3 pre3
-        . rename rel_4 pre2
-        . rename rel_5 pre1
-        . rename rel_6 ref
-        . rename rel_7 post0
-        . rename rel_8 post1
-        . rename rel_9 post2
-        . rename rel_10 post3
+        .gen rel=year-treat_year
+        .replace rel=0 if ever==0
+        .tab rel, gen(rel_)
+
+        .rename rel_1 pre8
+        .rename rel_2 pre7
+        .rename rel_3 pre6
+        .rename rel_4 pre5
+        .rename rel_5 pre4
+        .rename rel_6 pre3
+        .rename rel_7 pre2
+        .rename rel_8 ref
+        .rename rel_9 post0
+        .rename rel_10 post1
+        .rename rel_11 post2
+        .rename rel_12 post3
+        .rename rel_13 post4
 
     Run the stacked event study
         . stackedev outcome pre5 pre4 pre3 pre2 pre1 post0 post1 post2 post3 ref, cohort(treat_year) time(year) never_treat(no_treat) unit_fe(state) clust_unit(state) covariates(cov)
