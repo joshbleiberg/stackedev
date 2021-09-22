@@ -1,4 +1,5 @@
-*!version 0.0  24jun2021  Joshua Bleiberg, joshua_bleiberg@brown.edu
+*!version 0.1  24jun2021  Joshua Bleiberg, joshua_bleiberg@brown.edu
+*! modified on 21sep2021 by Sam Jones, jones@wider.unu.edu
 
 capture program drop stackedev
 program define stackedev, eclass sortpreserve
@@ -15,6 +16,9 @@ di "Error: Stacked event study requires never treated comparison units. The neve
 exit
 }
 
+*Marking Sample
+marksample touse 
+
 *Creating stacks for each treated cohort of units
 qui levelsof `cohort'
 	local t_val=r(levels)
@@ -22,6 +26,7 @@ foreach i of local t_val{
 preserve
 di "**** Building Stack `i' ****"
 
+qui keep if `touse' 
 qui gen stack_keep=0
 qui replace stack_keep=1 if `cohort' ==`i'
 qui replace stack_keep=1 if `never_treat'==1
@@ -34,12 +39,13 @@ restore
 }
 
 *Appending together each stack
+qui sum `cohort' if `touse'
 qui sum `cohort'
 local stackmin=r(min)
 
-qui levelsof `cohort' if `cohort'!=`stackmin'
+qui levelsof `cohort' if `cohort'!=`stackmin' & `touse'
 	local t_val2=r(levels)
-	
+preserve	
 qui use "`stack`stackmin''", clear
 
 qui tempfile all_stacks
@@ -64,9 +70,10 @@ qui replace `i'=`i'*stack
 
 *Estimating model with reghdfe
 di "**** Estimating Model with reghdfe ****"
-reghdfe `varlist' `covariates', absorb(i.`unit_fe'##i.stack i.`time'##i.stack `other_fe') cluster(`clust_var')
+reghdfe `varlist' `covariates' if `touse', absorb(i.`unit_fe'##i.stack i.`time'##i.stack `other_fe') cluster(`clust_var')
 
 qui drop stack unit_stack
+restore
 end
 
 	
