@@ -51,43 +51,69 @@ Description
     effects, and standard errors clustering on unit by stack.
 
 
-Examples
+Example
 
-    Read in simulated state policy dataset
-        . use https://github.com/joshbleiberg/stackedev/raw/main/state_policy_effect.dta, clear
+Read in simulated state policy dataset
+use "https://github.com/joshbleiberg/stackedev/raw/main/state_policy_effect.dta", clear
 
-    Create a variable equal to the time that the unit first received treatment. It must be missing for never treated units.
-        . gen treat_year=.
-        . replace treat_year=2006 if inrange(state,13,20)
-        . replace treat_year=2007 if inrange(state,21,25)
-        . replace treat_year=2008 if inrange(state,26,40)
-        . replace treat_year=2009 if inrange(state,40,50)
- 
-    Create never treated indicator that equals one if a unit never received treatment and zero if it did.
-        . gen no_treat=ever
-        . recode no_treat (0=1) (1=0)
+drop treat_year-post3
 
-    Create leads and lags
-        .gen rel=year-treat_year
-        .replace rel=0 if ever==0
-        .tab rel, gen(rel_)
+Assigning treatment to states staggered across time. It must be missing for never treated units.
+gen treat_year=.
+replace treat_year=2006 if inrange(state,13,20)
+replace treat_year=2007 if inrange(state,21,25)
+replace treat_year=2008 if inrange(state,26,40)
+replace treat_year=2009 if inrange(state,40,50)
 
-        .rename rel_1 pre8
-        .rename rel_2 pre7
-        .rename rel_3 pre6
-        .rename rel_4 pre5
-        .rename rel_5 pre4
-        .rename rel_6 pre3
-        .rename rel_7 pre2
-        .rename rel_8 ref
-        .rename rel_9 post0
-        .rename rel_10 post1
-        .rename rel_11 post2
-        .rename rel_12 post3
-        .rename rel_13 post4
+label variable treat_year "Cohort"
 
-    Run the stacked event study
-        . stackedev outcome pre5 pre4 pre3 pre2 pre1 post0 post1 post2 post3 ref, cohort(treat_year) time(year) never_treat(no_treat) unit_fe(state) clust_unit(state) covariates(cov)
+Creating ever treated indicator
+gen ever=0
+replace ever=1 if inrange(state,13,50) 
+label variable ever "Ever Treated"
+
+Creating never treated indicator that equals one if a unit never received treatment and zero if it did.
+gen no_treat=ever
+recode no_treat (0=1) (1=0)
+label variable no_treat "Never Treated"
+
+Creating leads and lags
+gen rel=year-treat_year
+replace rel=0 if ever==0
+tab rel, gen(rel_)
+
+label variable rel "Relative Time"
+
+rename rel_1 pre8
+rename rel_2 pre7
+rename rel_3 pre6
+rename rel_4 pre5
+rename rel_5 pre4
+rename rel_6 pre3
+rename rel_7 pre2
+rename rel_8 ref
+rename rel_9 post0
+rename rel_10 post1
+rename rel_11 post2
+rename rel_12 post3
+rename rel_13 post4
+
+label variable pre8 "Pre 8"
+label variable pre7 "Pre 7"
+label variable pre6 "Pre 6"
+label variable pre5 "Pre 5"
+label variable pre4 "Pre 4"
+label variable pre3 "Pre 3"
+label variable pre2 "Pre 2"
+label variable ref "Base Year"
+label variable post0 "Post 1"
+label variable post1 "Post 2"
+label variable post2 "Post 3"
+label variable post3 "Post 4"
+label variable post4 "Post 5"
+
+Run the stacked event study
+stackedev outcome pre8 pre7 pre6 pre5 pre4 pre3 pre2 post0 post1 post2 post3 post4 ref, cohort(treat_year) time(year) never_treat(no_treat) unit_fe(state) clust_unit(state) covariates(cov)
 
    
 Acknowledgements
