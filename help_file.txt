@@ -78,10 +78,9 @@ recode no_treat (0=1) (1=0)
 label variable no_treat "Never Treated"
 
 Creating leads and lags
-gen rel=year-treat_year
+gen rel=(year-treat_year)+1
 replace rel=0 if ever==0
 tab rel, gen(rel_)
-
 label variable rel "Relative Time"
 
 rename rel_1 pre8
@@ -92,11 +91,11 @@ rename rel_5 pre4
 rename rel_6 pre3
 rename rel_7 pre2
 rename rel_8 ref
-rename rel_9 post0
-rename rel_10 post1
-rename rel_11 post2
-rename rel_12 post3
-rename rel_13 post4
+rename rel_9 post1
+rename rel_10 post2
+rename rel_11 post3
+rename rel_12 post4
+rename rel_13 post5
 
 label variable pre8 "Pre 8"
 label variable pre7 "Pre 7"
@@ -106,11 +105,11 @@ label variable pre4 "Pre 4"
 label variable pre3 "Pre 3"
 label variable pre2 "Pre 2"
 label variable ref "Base Year"
-label variable post0 "Post 1"
-label variable post1 "Post 2"
-label variable post2 "Post 3"
-label variable post3 "Post 4"
-label variable post4 "Post 5"
+label variable post1 "Post 1"
+label variable post2 "Post 2"
+label variable post3 "Post 3"
+label variable post4 "Post 4"
+label variable post5 "Post 5"
 
 Run the stacked event study
 stackedev outcome pre8 pre7 pre6 pre5 pre4 pre3 pre2 post0 post1 post2 post3 post4 ref, cohort(treat_year) time(year) never_treat(no_treat) unit_fe(state) clust_unit(state) covariates(cov)
