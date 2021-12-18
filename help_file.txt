@@ -144,7 +144,7 @@ Installation of stackedev
 Attribution
     stackedev is not an official Stata command. It is a free contribution to the research community Please cite it as such:
 
-    Bleiberg, J. 2021.  stackedev: stacked event student.  https://github.com/joshbleiberg/stackedev.
+    Bleiberg, J. 2021.  stackedev: stacked event study.  https://github.com/joshbleiberg/stackedev.
 
 Author
 
