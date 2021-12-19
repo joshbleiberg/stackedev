@@ -56,8 +56,6 @@ Example
 Read in simulated state policy dataset
 use "https://github.com/joshbleiberg/stackedev/raw/main/state_policy_effect.dta", clear
 
-drop treat_year-post3
-
 Assigning treatment to states staggered across time. It must be missing for never treated units.
 gen treat_year=.
 replace treat_year=2006 if inrange(state,13,20)
