@@ -114,7 +114,7 @@ stackedev outcome pre8 pre7 pre6 pre5 pre4 pre3 pre2 post1 post2 post3 post4 ref
 
    
 Acknowledgements
-    Thanks to Liyang Sun author of eventstudyinteract, which served as a reference point for the code herein.
+    Thanks to Liyang Sun author of eventstudyinteract, which served as a reference point for the code herein. Thanks also to Edward Jones who help patch a few bugs. Thanks Christopher Cleveland for identifying a bug with how weights were implemented.
 
 References
     Baker, A., Larcker, D. F., & Wang, C. C. (2021). How Much Should We Trust Staggered Difference-In-Differences Estimates?. Available at SSRN 3794018.
