@@ -160,4 +160,4 @@ Run the stacked event study{p_end}
 {pstd}
     Joshua Bleiberg{p_end}
 {pstd}
-    joshua_bleiberg@brown.edu{p_end}
+    jbleiberg@pitt.edu{p_end}
