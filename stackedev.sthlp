@@ -128,7 +128,7 @@ Run the stacked event study{p_end}
 
 {title: Acknowledgements}
 {pstd}
-    Thanks to Liyang Sun author of eventstudyinteract, which served as a reference point for the code herein. Thanks also to Edward Jones who help patch a few bugs.
+    Thanks to Liyang Sun author of eventstudyinteract, which served as a reference point for the code herein. Thanks also to Edward Jones who help patch a few bugs. Thanks Christopher Cleveland for identifying a bug with how weights were implemented.
 {p_end}
 
 {title: References}
