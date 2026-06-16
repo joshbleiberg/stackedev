@@ -10,7 +10,7 @@ Syntax
 
     	where leads_lags_list is the list of relative time indicators as you would have included in the canonical event study e.g.
  
-                [pre3 pre2 post0 post1 [...]] 
+                [pre3 pre2 post1 post2 post3 post4 ref [...]] 
 
     stackedev requires avar (Baum and Schaffer, 2013) and reghdfe (Sergio, 2017) to be installed.
 
@@ -102,7 +102,7 @@ label variable pre5 "Pre 5"
 label variable pre4 "Pre 4"
 label variable pre3 "Pre 3"
 label variable pre2 "Pre 2"
-label variable ref "Base Year"
+label variable ref "Base Year- Pre 1"
 label variable post1 "Post 1"
 label variable post2 "Post 2"
 label variable post3 "Post 3"
@@ -110,7 +110,7 @@ label variable post4 "Post 4"
 label variable post5 "Post 5"
 
 Run the stacked event study
-stackedev outcome pre8 pre7 pre6 pre5 pre4 pre3 pre2 post0 post1 post2 post3 post4 ref, cohort(treat_year) time(year) never_treat(no_treat) unit_fe(state) clust_unit(state) covariates(cov)
+stackedev outcome pre8 pre7 pre6 pre5 pre4 pre3 pre2 post1 post2 post3 post4 ref, cohort(treat_year) time(year) never_treat(no_treat) unit_fe(state) clust_unit(state) covariates(cov)
 
    
 Acknowledgements
