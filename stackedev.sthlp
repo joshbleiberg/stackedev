@@ -112,7 +112,7 @@ Creating leads and lags{p_end}
     . label variable pre4 "Pre 4"
     . label variable pre3 "Pre 3"
     . label variable pre2 "Pre 2"
-    . label variable ref "Base Year"
+    . label variable ref "Base Year- Pre 1"
     . label variable post1 "Post 1"
     . label variable post2 "Post 2"
     . label variable post3 "Post 3"
@@ -122,7 +122,7 @@ Creating leads and lags{p_end}
 {pstd}
 Run the stacked event study{p_end}
 {pstd}
-    . stackedev outcome pre8 pre7 pre6 pre5 pre4 pre3 pre2 post0 post1 post2 post3 post4 ref, cohort(treat_year) time(year) never_treat(no_treat) unit_fe(state) clust_unit(state) covariates(cov)
+    . stackedev outcome pre8 pre7 pre6 pre5 pre4 pre3 pre2 ref post1 post2 post3 post4 ref, cohort(treat_year) time(year) never_treat(no_treat) unit_fe(state) clust_unit(state) covariates(cov)
 {p_end}
 
 
