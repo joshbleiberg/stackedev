@@ -1,5 +1,7 @@
 *!version 0.1  24jun2021  Joshua Bleiberg, joshua_bleiberg@brown.edu
 *! modified on 21sep2021 by Sam Jones, jones@wider.unu.edu
+*! modified on 15jun2026: pass [weight exp] through to reghdfe so documented
+*! pweight/aweight/fweight options actually affect estimation (previously ignored)
 
 capture program drop stackedev
 program define stackedev, eclass sortpreserve
@@ -70,10 +72,8 @@ qui replace `i'=`i'*stack
 
 *Estimating model with reghdfe
 di "**** Estimating Model with reghdfe ****"
-reghdfe `varlist' `covariates' if `touse', absorb(i.`unit_fe'##i.stack i.`time'##i.stack `other_fe') cluster(`clust_var')
+reghdfe `varlist' `covariates' [`weight'`exp'] if `touse', absorb(i.`unit_fe'##i.stack i.`time'##i.stack `other_fe') cluster(`clust_var')
 
 qui drop stack unit_stack
 restore
 end
-
-	
