@@ -26,8 +26,7 @@ implements the stacked event study estimator discussed in Cunningham (2021) and 
 {pstd}
 where {it:leads_lags_list}} is the list of relative time indicators as you would have included in the canonical two-way fixed effects regression, for example:
 {p_end} 
-		[{it:post2}] [{it:post3}] [{it:post2}] [{it:post0}] [{it:post1}] [{it:post3}] [...]] 
-
+		[{it:pre3}] [{it:pre2}] [{it:post1}] [{it:post2}] [{it:post3}] [{it:ref}] [...]] 
 
 {pstd}
 Users should shape their dataset to a long format where each observation is at the unit-time level. See {help stackedev##examples:illustration} for an example of specifying the syntax. The syntax is similar to {helpb reghdfe} in specifying fixed effects (with {help reghdfe##opt_absorb:absorb}) 
@@ -122,7 +121,7 @@ Creating leads and lags{p_end}
 {pstd}
 Run the stacked event study{p_end}
 {pstd}
-    . stackedev outcome pre8 pre7 pre6 pre5 pre4 pre3 pre2 ref post1 post2 post3 post4 ref, cohort(treat_year) time(year) never_treat(no_treat) unit_fe(state) clust_unit(state) covariates(cov)
+    . stackedev outcome pre8 pre7 pre6 pre5 pre4 pre3 pre2 post1 post2 post3 post4 ref, cohort(treat_year) time(year) never_treat(no_treat) unit_fe(state) clust_unit(state) covariates(cov)
 {p_end}
 
 
